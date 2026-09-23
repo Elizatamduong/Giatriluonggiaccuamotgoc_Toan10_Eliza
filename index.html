@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Polyfill/shim to allow reassigning window.fetch in environments where Window.prototype.fetch has only a getter
+      (function() {
+        try {
+          var originalFetch = typeof window !== 'undefined' && window.fetch ? window.fetch.bind(window) : null;
+          var currentFetch = originalFetch;
+
+          Object.defineProperty(window, 'fetch', {
+            configurable: true,
+            enumerable: true,
+            get: function() {
+              return currentFetch;
+            },
+            set: function(newFetch) {
+              currentFetch = newFetch;
+            }
+          });
+
+          if (typeof Window !== 'undefined' && Window.prototype) {
+            try {
+              var desc = Object.getOwnPropertyDescriptor(Window.prototype, 'fetch');
+              if (desc && !desc.set && desc.configurable) {
+                Object.defineProperty(Window.prototype, 'fetch', {
+                  configurable: true,
+                  enumerable: true,
+                  get: desc.get || function() { return currentFetch; },
+                  set: function(newFetch) {
+                    currentFetch = newFetch;
+                  }
+                });
+              }
+            } catch (e) {}
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <title>Giá trị lượng giác từ 0° đến 180° - Toán 10</title>
+    <meta name="author" content="Eliza Tâm Dương - SĐT: 0962571826" />
+    <meta name="copyright" content="Bản quyền Eliza Tâm Dương - SĐT: 0962571826" />
+    <meta name="description" content="Mô phỏng trực quan tương tác nửa đường tròn đơn vị và giá trị lượng giác sin, cos, tan, cot của góc từ 0° đến 180° cho học sinh lớp 10." />
+    <meta property="og:title" content="Giá trị lượng giác từ 0° đến 180° - Toán 10" />
+    <meta property="og:description" content="Mô phỏng trực quan tương tác nửa đường tròn đơn vị và giá trị lượng giác sin, cos, tan, cot của góc từ 0° đến 180° cho học sinh lớp 10." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-slate-50 text-slate-800 antialiased selection:bg-indigo-100 selection:text-indigo-900 font-sans">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

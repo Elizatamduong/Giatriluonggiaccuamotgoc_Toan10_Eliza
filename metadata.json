@@ -1,0 +1,6 @@
+{
+  "name": "Giá trị lượng giác từ 0° đến 180° - Toán 10",
+  "description": "Mô phỏng trực quan tương tác nửa đường tròn đơn vị và giá trị lượng giác sin, cos, tan, cot của góc từ 0° đến 180° cho học sinh lớp 10.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
